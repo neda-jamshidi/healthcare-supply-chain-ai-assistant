@@ -13,9 +13,7 @@ query routing, and operational analytics.
 
 <p align="center">
   <em>
-    Conceptual interface illustration created for portfolio purposes.
-    No real operational data, production interface, or organization-specific
-    information is shown.
+   Conceptual illustration of the implemented system’s interface, recreated for public portfolio presentation. The underlying system is fully implemented; only the interface shown here has been redesigned to avoid exposing real operational data, the production interface, or organization-specific information.
   </em>
 </p>
 
