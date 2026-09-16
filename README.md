@@ -454,9 +454,10 @@ contents, internal prompts, real application screenshots, organization-specific
 workflows, business rules, and operational information are intentionally not
 published.
 
-The architecture and technologies described in this repository reflect the
-implemented system, while the interface image shown above is a conceptual
-illustration created specifically for public portfolio presentation.
+The architecture and technologies described in this repository reflect the implemented system.
+The interface image shown above is a recreated conceptual representation of the implemented 
+application, produced specifically for public portfolio presentation to avoid exposing the
+production interface, operational data, or organization-specific information.
 
 ---
 
