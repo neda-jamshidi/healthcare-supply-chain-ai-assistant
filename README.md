@@ -6,16 +6,15 @@ Retrieval-Augmented Generation (RAG), hybrid SQL/vector retrieval, specialized
 query components, operational analytics, and intelligent routing.
 
 <p align="center">
-  <img src="assets/conceptual-interface.png"
-       alt="Conceptual interface of the Healthcare Supply Chain AI Assistant"
-       width="900">
+  <img src="AI-assistant.png"
+       alt="Healthcare Supply Chain AI Assistant"
+       width="700">
 </p>
 
 <p align="center">
   <em>
     Conceptual interface illustration created for portfolio purposes.
-    No real operational data, production interface, or organization-specific
-    information is shown.
+    No real operational data, production interface, or organization-specific information is shown.
   </em>
 </p>
 
