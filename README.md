@@ -436,48 +436,32 @@ workflow covering:
 
 ---
 
-## Confidentiality & Repository Scope
+## Project Implementation & Repository Scope
 
-This is a **documentation-only portfolio repository**.
+This project represents a fully implemented AI system developed for a real-world
+healthcare supply-chain environment.
 
-It contains only a high-level conceptual and technical description of the
-system.
+I designed and implemented the end-to-end system, including data processing,
+SQLite-based structured retrieval, local LLM integration, intelligent query
+routing, specialized query and analytical components, Retrieval-Augmented
+Generation (RAG), embedding-based semantic retrieval with ChromaDB, hybrid
+SQL/vector retrieval, and the Streamlit conversational interface.
 
-To protect confidential and organization-specific information, this repository
-does **not** contain:
+Due to the confidential nature of the operational environment, this public
+repository serves as a technical portfolio and architecture overview rather
+than a distribution of the production implementation.
 
-- Source code
-- Original or processed datasets
-- Database files
-- Vector-store contents
-- Embeddings
-- Production application screenshots
-- Real user conversations
-- Internal prompts or system instructions
-- Organization-specific identifiers
-- Operational records
-- Internal workflows
-- Business rules
-- Prioritization formulas
-- Internal parameters or thresholds
+The production source code, operational datasets, databases, vector-store
+contents, internal prompts, real application screenshots, organization-specific
+workflows, business rules, and operational information are intentionally not
+published.
 
-No real operational information is included.
+The architecture and technologies described in this repository reflect the
+implemented system, while the interface image shown above is a conceptual
+illustration created specifically for public portfolio presentation.
 
 ---
 
-## Repository Purpose
-
-This repository is intended solely to document the high-level architecture and
-technical scope of an applied AI project.
-
-It demonstrates the integration of:
-
-**Local LLMs · RAG · ChromaDB · SQLite · Hybrid Retrieval · Query Routing ·
-Conversational AI · Analytics · Decision Support**
-
-The repository is **not an open-source distribution of the production system**.
-
----
 
 ## Author
 
