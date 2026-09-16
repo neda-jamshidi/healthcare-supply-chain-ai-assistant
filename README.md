@@ -1,5 +1,3 @@
-# healthcare-supply-chain-ai-assistant
-Privacy-conscious local LLM assistant for healthcare supply-chain decision support, combining RAG, hybrid retrieval, query routing, and operational analytics.
 # Healthcare Supply Chain AI Assistant
 
 A privacy-conscious, locally deployed conversational AI system for healthcare
