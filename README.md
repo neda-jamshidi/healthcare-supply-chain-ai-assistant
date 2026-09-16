@@ -2,19 +2,20 @@
 
 A privacy-conscious, locally deployed conversational AI system for healthcare
 supply-chain decision support, combining a local Large Language Model,
-Retrieval-Augmented Generation (RAG), hybrid SQL/vector retrieval, specialized
-query components, operational analytics, and intelligent routing.
+Retrieval-Augmented Generation (RAG), hybrid SQL/vector retrieval, intelligent
+query routing, and operational analytics.
 
 <p align="center">
   <img src="AI-assistant.png"
-       alt="Healthcare Supply Chain AI Assistant"
+       alt="Conceptual interface of the Healthcare Supply Chain AI Assistant"
        width="700">
 </p>
 
 <p align="center">
   <em>
     Conceptual interface illustration created for portfolio purposes.
-    No real operational data, production interface, or organization-specific information is shown.
+    No real operational data, production interface, or organization-specific
+    information is shown.
   </em>
 </p>
 
@@ -22,87 +23,468 @@ query components, operational analytics, and intelligent routing.
 
 ## Overview
 
-Healthcare supply-chain operations involve heterogeneous information related
-to products, suppliers, orders, availability, operational status, and
-procurement activities.
+This project presents the architecture of a locally deployed conversational AI
+assistant designed to support information access, analysis, and decision-making
+in a healthcare supply-chain context.
 
-Accessing this information efficiently can require users to navigate multiple
-data sources, manually inspect records, and perform different types of
-structured and analytical queries.
+The system enables users to interact with structured and unstructured
+information through natural language while automatically selecting an
+appropriate retrieval or processing strategy.
 
-This project addresses this problem through a conversational AI assistant that
-provides natural-language access to healthcare supply-chain information and
-decision-support functionality.
+It combines:
 
-The system combines structured data processing, a SQLite backend, semantic
-retrieval, Retrieval-Augmented Generation (RAG), specialized query and
-analysis components, intelligent routing, and a locally deployed Large
-Language Model within a Streamlit application.
-
-The project was developed in the context of a professional research internship
-in the public healthcare sector.
-
----
-
-## Key Features
-
-- Natural-language interaction with healthcare supply-chain information
-- Fully local LLM inference
-- Specialized query and analysis components
-- Intelligent query routing
+- Local Large Language Model inference
 - Structured SQL-based retrieval
-- Embedding-based semantic retrieval
 - Retrieval-Augmented Generation (RAG)
-- Hybrid SQL + vector retrieval
-- Supplier and order analysis
+- Embedding-based semantic retrieval
+- Vector search with ChromaDB
+- Intelligent query routing
+- Specialized query and analysis components
 - Operational analytics
-- Decision-support and prioritization
-- Interactive Streamlit interface
-- Privacy-conscious local architecture
+- Conversational interaction
+
+The architecture is designed around local processing and privacy-conscious AI
+deployment.
 
 ---
 
 ## System Architecture
 
-The system combines deterministic structured retrieval with semantic retrieval
-and local LLM inference.
+The system uses a hybrid retrieval architecture that combines structured
+database access with semantic vector retrieval.
 
 ```text
-                 Healthcare Operational Data
-                            │
-                            ▼
-                 Processing & Integration
-                            │
-                ┌───────────┴───────────┐
-                │                       │
-                ▼                       ▼
-             SQLite                 Embeddings
-                │                       │
-                ▼                       ▼
-       Structured Retrieval          ChromaDB
-                │                       │
-                │                       ▼
-                │              Semantic Retrieval
-                │                       │
-                └───────────┬───────────┘
-                            │
-                            ▼
-                       Query Router
-                            │
-                            ▼
-              Specialized Query & Analysis
-                       Components
-                            │
-                            ▼
-                  Retrieved Context
-                            │
-                            ▼
-               Qwen2.5-Coder-3B-Instruct
-                            │
-                       LM Studio
-                            │
-                            ▼
-                Conversational Assistant
-                            │
-                            ▼
-              Healthcare Decision Support
+                    Operational Information
+                              │
+                              ▼
+                    Processing & Integration
+                              │
+                 ┌────────────┴────────────┐
+                 │                         │
+                 ▼                         ▼
+              SQLite                   Embeddings
+                 │                         │
+                 ▼                         ▼
+        Structured Retrieval           ChromaDB
+                 │                         │
+                 │                         ▼
+                 │                Semantic Retrieval
+                 │                         │
+                 └────────────┬────────────┘
+                              │
+                              ▼
+                         Query Router
+                              │
+                              ▼
+                 Specialized Components
+                              │
+                              ▼
+                     Retrieved Context
+                              │
+                              ▼
+                Qwen2.5-Coder-3B-Instruct
+                              │
+                         LM Studio
+                              │
+                              ▼
+                  Conversational Assistant
+                              │
+                              ▼
+                       Decision Support
+```
+
+The routing layer determines which retrieval or analytical strategy is most
+appropriate for each user request.
+
+---
+
+## Conversational AI
+
+The system provides a conversational interface for interacting with information
+through natural language.
+
+Rather than requiring users to manually navigate structured information or
+construct database queries, the assistant interprets incoming requests and
+routes them through the appropriate processing pipeline.
+
+Depending on the request, the system can use:
+
+- Structured database retrieval
+- Semantic vector retrieval
+- Retrieval-Augmented Generation
+- Analytical processing
+- Specialized query components
+- General conversational interaction
+
+The results are integrated into a unified conversational experience.
+
+---
+
+## Intelligent Query Routing
+
+A routing mechanism is used to classify incoming requests and select the
+appropriate processing strategy.
+
+```text
+                     User Request
+                          │
+                          ▼
+                     Query Router
+                          │
+          ┌───────────────┼───────────────┐
+          │               │               │
+          ▼               ▼               ▼
+     Structured        Semantic        Analytical
+      Retrieval        Retrieval       Processing
+          │               │               │
+          ▼               ▼               ▼
+       SQLite           ChromaDB        Specialized
+                                          Components
+          │               │               │
+          └───────────────┴───────────────┘
+                          │
+                          ▼
+                      Local LLM
+                          │
+                          ▼
+                       Response
+```
+
+This modular approach allows deterministic retrieval, semantic search, and
+LLM-based interaction to coexist within the same application.
+
+---
+
+## Retrieval-Augmented Generation (RAG)
+
+The system implements a Retrieval-Augmented Generation pipeline to ground
+language-model responses in retrieved information.
+
+Instead of relying exclusively on the model's internal knowledge, relevant
+context is retrieved from the local information environment before response
+generation.
+
+The RAG workflow follows:
+
+```text
+User Query
+    │
+    ▼
+Query Embedding
+    │
+    ▼
+Semantic Similarity Search
+    │
+    ▼
+ChromaDB Vector Store
+    │
+    ▼
+Relevant Context Retrieval
+    │
+    ▼
+Context-Augmented Prompt
+    │
+    ▼
+Local LLM
+    │
+    ▼
+Grounded Response
+```
+
+This architecture enables the assistant to retrieve semantically relevant
+information even when the user's wording does not exactly match the terminology
+of the indexed content.
+
+---
+
+## Embedding-Based Retrieval
+
+Information used by the RAG pipeline is represented through vector embeddings
+and indexed in **ChromaDB**.
+
+Incoming user queries are converted into embedding representations and compared
+against the vector store through semantic similarity search.
+
+The most relevant retrieved context is then provided to the local language
+model during response generation.
+
+This provides semantic information access beyond exact keyword matching.
+
+---
+
+## Hybrid SQL + Vector Retrieval
+
+The system combines two complementary retrieval mechanisms.
+
+### Structured Retrieval — SQLite
+
+SQLite is used when a request requires precise, deterministic access to
+structured information.
+
+This approach is appropriate for exact values, filters, structured attributes,
+and database-oriented queries.
+
+### Semantic Retrieval — ChromaDB
+
+ChromaDB is used when a request benefits from semantic similarity and
+contextual retrieval.
+
+Embedding-based search allows relevant information to be identified based on
+meaning rather than exact lexical matching.
+
+### Hybrid Strategy
+
+The routing layer determines which strategy is appropriate for the incoming
+request.
+
+```text
+Natural-Language Query
+          │
+          ▼
+      Query Router
+          │
+     ┌────┴────┐
+     │         │
+     ▼         ▼
+   SQLite    ChromaDB
+     │         │
+     ▼         ▼
+Structured   Semantic
+ Context     Context
+     │         │
+     └────┬────┘
+          │
+          ▼
+      Local LLM
+          │
+          ▼
+       Response
+```
+
+This allows structured database operations and semantic retrieval to complement
+each other within the same conversational system.
+
+---
+
+## Local Large Language Model
+
+The conversational assistant is powered by:
+
+**Qwen2.5-Coder-3B-Instruct (MLX)**
+
+with local model serving through **LM Studio**.
+
+The model operates locally as part of the application pipeline and interacts
+with context produced by the retrieval and analytical components.
+
+Local deployment supports:
+
+- Local LLM inference
+- Greater control over data processing
+- Integration with local databases and retrieval systems
+- Reduced dependency on external AI services
+- Privacy-conscious AI workflows
+
+---
+
+## Specialized Components
+
+The architecture incorporates specialized components for different categories
+of information requests.
+
+These components support:
+
+- Precise structured information retrieval
+- Semantic information retrieval
+- Analytical queries
+- Information aggregation
+- Context construction
+- General conversational interaction
+
+A routing layer coordinates these components and selects the appropriate
+processing path according to the user's request.
+
+The detailed internal workflows and organization-specific business logic are
+intentionally outside the scope of this repository.
+
+---
+
+## Analytics & Decision Support
+
+The system incorporates analytical and decision-support functionality in
+addition to conversational information retrieval.
+
+Structured information can be processed through dedicated analytical components
+before relevant results are returned through the conversational interface.
+
+The implementation of organization-specific decision rules, parameters,
+thresholds, and internal operational logic is intentionally not disclosed.
+
+---
+
+## User Interface
+
+The system is integrated into an interactive application developed with
+**Streamlit**.
+
+The interface provides a unified environment for:
+
+- Natural-language interaction
+- Structured information retrieval
+- Semantic search
+- Retrieval-Augmented Generation
+- Analytical queries
+- Decision-support interaction
+
+The image shown at the beginning of this README is a conceptual illustration
+created specifically for portfolio presentation.
+
+It is not a screenshot of the production application.
+
+---
+
+## Privacy-Conscious Architecture
+
+Privacy is a central architectural consideration.
+
+The main AI and retrieval components are designed to operate locally:
+
+```text
+┌────────────────── Local Environment ──────────────────┐
+│                                                       │
+│                Local Information                      │
+│                       │                               │
+│          ┌────────────┴────────────┐                  │
+│          │                         │                  │
+│        SQLite                   ChromaDB              │
+│          │                         │                  │
+│          └────────────┬────────────┘                  │
+│                       │                               │
+│                      RAG                              │
+│                       │                               │
+│                  Local LLM                            │
+│                       │                               │
+│                  Application                          │
+│                                                       │
+└───────────────────────────────────────────────────────┘
+```
+
+This design minimizes the need to transmit operational information to external
+LLM providers.
+
+---
+
+## Technology Stack
+
+### AI & NLP
+
+- Qwen2.5-Coder-3B-Instruct
+- MLX
+- LM Studio
+- Local LLM inference
+- Conversational AI
+
+### Retrieval
+
+- Retrieval-Augmented Generation (RAG)
+- Embedding-based semantic retrieval
+- ChromaDB
+- Vector similarity search
+- Hybrid SQL + vector retrieval
+
+### Data & Backend
+
+- Python
+- SQLite
+- Pandas
+- Structured data processing
+
+### Application
+
+- Streamlit
+
+### Architecture
+
+- Intelligent query routing
+- Specialized query components
+- Structured retrieval
+- Semantic retrieval
+- Context-augmented generation
+- Operational analytics
+- Decision-support workflows
+
+---
+
+## Technical Contributions
+
+The project involved the design and implementation of an end-to-end applied AI
+workflow covering:
+
+- Data preprocessing and integration
+- Structured data management with SQLite
+- Local LLM deployment and integration
+- Conversational AI workflow design
+- Specialized query and analysis components
+- Intelligent query routing
+- Retrieval-Augmented Generation
+- Embedding-based semantic retrieval
+- ChromaDB vector-store integration
+- Hybrid SQL and vector retrieval
+- Analytical and decision-support components
+- Streamlit application development
+- Privacy-conscious local AI architecture
+
+---
+
+## Confidentiality & Repository Scope
+
+This is a **documentation-only portfolio repository**.
+
+It contains only a high-level conceptual and technical description of the
+system.
+
+To protect confidential and organization-specific information, this repository
+does **not** contain:
+
+- Source code
+- Original or processed datasets
+- Database files
+- Vector-store contents
+- Embeddings
+- Production application screenshots
+- Real user conversations
+- Internal prompts or system instructions
+- Organization-specific identifiers
+- Operational records
+- Internal workflows
+- Business rules
+- Prioritization formulas
+- Internal parameters or thresholds
+
+No real operational information is included.
+
+---
+
+## Repository Purpose
+
+This repository is intended solely to document the high-level architecture and
+technical scope of an applied AI project.
+
+It demonstrates the integration of:
+
+**Local LLMs · RAG · ChromaDB · SQLite · Hybrid Retrieval · Query Routing ·
+Conversational AI · Analytics · Decision Support**
+
+The repository is **not an open-source distribution of the production system**.
+
+---
+
+## Author
+
+**Neda Jamshidi**
+
+PhD Researcher in Artificial Intelligence & Natural Language Processing  
+Department of Information Engineering and Mathematics (DIISM)  
+University of Siena, Italy
+                
+                            
