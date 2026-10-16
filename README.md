@@ -94,6 +94,11 @@ database access with semantic vector retrieval.
 The routing layer determines which retrieval or analytical strategy is most
 appropriate for each user request.
 
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
+![RAG](https://img.shields.io/badge/RAG-Enabled-green)
+![LLM](https://img.shields.io/badge/LLM-Local-purple)
+
 ---
 
 ## Conversational AI
